@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phased</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" />
+</head>
+<body>
+    <header>
+        <h1>CryptoBull</h1>
+        <h2>Cryptocurrency Advisor</h2>
+
+    </header>
+    <article id= "speechContainer">
+        <form method="POST" enctype="multipart/form-data">
+            <section class="card">
+                <label for="message">
+                    Enter invest value
+                </label>
+                <input type="text" name="message">
+                <input type="submit" value="Advise!" />  
+            </section>
+            <span class="arrow"></span>
+            <section class="card">
+                <!-- <input class="file-upload" type="file" name="file"/>
+                <button class="file-upload-button" type="button">Choose file</button>
+                <p class="file-upload-label"></p> -->
+                <p>Profit/Loss %: {{message}}</p>
+                <span></span>
+            </section>
+        </form>
+    </article>
+    <p></p>
+    <script>
+        document.querySelectorAll('.file-upload-button').forEach(
+            function(button) {
+                const hiddenInput = button.parentElement.querySelector('.file-upload');
+                const label = button.parentElement.querySelector('.file-upload-label');
+                const defaultLabelText = 'No file selected';
+                label.textContent = defaultLabelText;
+                label.title = defaultLabelText;
+                
+
+                button.addEventListener('click', function(){
+                    hiddenInput.click();
+                })
+
+                hiddenInput.addEventListener('change',function(){
+                    const fileNameList = Array.from(hiddenInput.files).map(function(file){
+                        return file.name;
+                    });
+                    label.textContent = fileNameList.join(', ') || defaultLabelText;
+                    label.title = label.textContent;
+                });
+            }
+        );        
+    </script>
+</body>
+</html>
